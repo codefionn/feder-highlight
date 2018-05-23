@@ -12,14 +12,13 @@ syn keyword constants null true false
 syn keyword langKeywordsDecl class func interface namespace type nextgroup=name
 syn keyword langKeywords if else while global break continue return include from for
 
-syn region comment start="##" end="##" fold contains=none
 
 " Matches
 syn match objname   '[A-z_][A-z0-9_]*'
 syn match celNumber '\d\+'
 syn match celNumber '[-+]\d\+'
 syn match celNumber '[-+]\d\+.\d*'
-syn match celNumber '0x\d\+'
+syn match celNumber '0x\[0-9ABCDEFabcdef]\+'
 syn match celLang   '[ \t]]*:.*$'
 syn match celLang	'^:.*$'
 syn match comment   '#[^#].*$'
@@ -37,6 +36,8 @@ syn match todo		'#[^#].*TODO.*$'
 syn region celString start=/\v"/ skip=/\v\\./ end=/\v"/
 syn region celString start=/\v'/ skip=/\v\\./ end=/\v'/
 
+syn region multi_comment start="##" end="##" fold contains=comment
+
 " Highlighting
 hi def link equals			Statement
 hi def link constants		Constant
@@ -46,5 +47,6 @@ hi def link celNumber		Constant
 hi def link celLang			PreProc
 hi def link celString		Constant
 hi def link comment			Comment
+hi def link multi_comment   Comment
 hi def link name			Type
 hi def link todo			Todo
