@@ -12,19 +12,21 @@ syn keyword constants null true false
 syn keyword langKeywordsDecl class func interface namespace type nextgroup=name
 syn keyword langKeywords if else while global break continue return include from for
 
-syn region comment start="##" end="##" fold contains=none
+syn keyword celTodo contained TODO FIXME NOTE
+
+syn region comment start='##' end='##' fold contains=celTodo
 
 " Matches
 syn match objname   '[A-z_][A-z0-9_]*'
 syn match celNumber '\d\+'
 syn match celNumber '[-+]\d\+'
 syn match celNumber '[-+]\d\+.\d*'
-syn match celNumber '0x\d\+'
+syn match celNumber '0x\[0-9ABCDEFabcdef]\+'
 syn match celLang   '[ \t]]*:.*$'
 syn match celLang	'^:.*$'
-syn match comment   '#[^#].*$'
-syn match comment   '#$'
-syn match todo		'#[^#].*TODO.*$'
+
+syn match comment   '#[^#].*$'  contains=celTodo
+syn match comment   '#$'        contains=celTodo
 
 " Regions
 " syn region celBody start="else"  end=";" fold 
@@ -36,6 +38,7 @@ syn match todo		'#[^#].*TODO.*$'
 
 syn region celString start=/\v"/ skip=/\v\\./ end=/\v"/
 syn region celString start=/\v'/ skip=/\v\\./ end=/\v'/
+
 
 " Highlighting
 hi def link equals			Statement
